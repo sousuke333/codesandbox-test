@@ -176,8 +176,132 @@ module.hot.accept(reloadCSS);
 "use strict";
 
 require("./styles.css");
-document.getElementById("app").innerHTML = "\n<h1>Hello Vanilla!</h1>\n<div>\n  We use the same configuration as Parcel to bundle this sandbox, you can find more\n  info about Parcel \n  <a href=\"https://parceljs.org\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.\n</div>\n";
+var _console;
 console.log("test");
+
+//変数、定数宣言
+// var testOld = 'test';
+
+var fastName = "Tarou";
+var lastName = "Tanaka";
+
+//テンプレート文字列 ``
+var userName = "".concat(fastName, " ").concat(lastName, "\u3055\u3093");
+
+//アロー関数 function(){}の代替で使える。ただしthisが宣言した場所を参照してしまう。ネスト無しだとwindowがthisに
+//関数内のメソッドに用いる際は特に注意
+var nameShow = function nameShow() {
+  console.log(userName);
+};
+
+//分割代入　オブジェクトから同名の受け皿を変数に受け取る
+
+var myObject = {
+  name: "yamada",
+  old: 20
+};
+var name = myObject.name,
+  old = myObject.old;
+
+//デフォルト値　値が無い場合、指定の値を埋め込む指定。 デフォルト値無しの際はundefinedになる
+
+var _myObject$from = myObject.from,
+  from = _myObject$from === void 0 ? "tokyo" : _myObject$from,
+  _myObject$height = myObject.height,
+  height = _myObject$height === void 0 ? 170 : _myObject$height;
+console.log(from, height);
+
+//スプレッド構文　...
+//配列の展開
+var arr1 = [1, 2];
+(_console = console).log.apply(_console, arr1);
+var sumFunc = function sumFunc(num1, num2) {
+  return console.log(num1 + num2);
+};
+sumFunc(arr1[0], arr1[1]);
+sumFunc.apply(void 0, arr1);
+
+//スプレッド構文を利用して配列の中身をまとめてみる
+var arr2 = [1, 2, 3, 4, 5, 6];
+//配列版分割代入
+var num1 = arr2[0],
+  num2 = arr2[1],
+  arr3 = arr2.slice(2);
+console.log(num1);
+console.log(num2);
+console.log(arr3);
+
+//配列のコピーと結合
+
+var arr4 = [10, 20];
+var arr5 = [30, 40];
+var arr6 = [].concat(arr4);
+var arr7 = [].concat(arr4, arr5);
+
+//メリットはイコールでそのまま代入すると編集したときに参照元まで変更されてしまう
+var arr8 = arr4;
+arr8[0] = 700;
+console.log(arr4); //参照元のarr4まで変更されてしまっている
+
+//mapやfilterなど配列から新たな配列を作る
+
+var nameArr = ["tanaka", "yamada", "jake"];
+for (var i = 0; i < nameArr.length; i++) {
+  console.log(nameArr[i]);
+}
+//mapで簡略化
+var nameArr2 = nameArr.map(function (name) {
+  //配列内の要素を受け取り操作する
+  return name;
+});
+//mapの二つ目の引数にはindex番号が入ってくる
+nameArr.map(function (name, index) {
+  return console.log("".concat(index + 1, ":").concat(name, "\u3055\u3093"));
+});
+
+//filter returnに条件を書いてtrueの物だけ新しい配列として返す
+
+var numArr = [1, 2, 3, 4, 5];
+var newNumArr = numArr.filter(function (num) {
+  return num % 2 === 1; //奇数指定
+  // return num % 2 === 0; //偶数指定
+});
+
+//三項演算子
+//条件 ? trueの処理　: falseの処理；
+var testNum = 1300;
+//toLocaleStringは親のnumberをみて桁ごとにカンマを打ってくれる
+console.log(testNum.toLocaleString());
+var testNum2 = "1300";
+var formattedNum = typeof testNum2 === "number" ? testNum2.toLocaleString() : "numberではありません";
+console.log(formattedNum);
+var checkSum = function checkSum(num1, num2) {
+  return num1 + num2 > 100 ? "100over" : "OK!";
+};
+console.log(checkSum(20, 20));
+
+//論理演算子 && ||
+// const flag1 = true;
+// const flag2 = false;
+
+// if(flag1 || flag2) {
+//   console.log('1か2はtrueになります')
+// }
+
+// if(flag1 && flag2) {
+//   console.log('1も2はtrueになります')
+// }
+
+// || は左がfalseなら右側を返す
+// const flagNum = null;//feeに金額が未設定ですが入る
+var flagNum = 100; //feeに100が入る
+var fee = flagNum || "金額が未設定です";
+console.log(fee);
+// &&　は左がtrueなら右側を返す
+// const flagNum2 = null;
+var flagNum2 = 100; //
+var fee2 = flagNum2 && "何か設定されました"; //左がtrueなら'何か設定されました'が入る
+console.log(fee2);
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
